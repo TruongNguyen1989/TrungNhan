@@ -17,6 +17,8 @@ using Volo.Saas.EntityFrameworkCore;
 using Volo.Saas.Editions;
 using Volo.Saas.Tenants;
 using Volo.Payment.EntityFrameworkCore;
+using TrungNhan.Categories;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace TrungNhan.EntityFrameworkCore
 {
@@ -85,12 +87,13 @@ namespace TrungNhan.EntityFrameworkCore
 
             /* Configure your own tables/entities inside here */
 
-            //builder.Entity<YourEntity>(b =>
-            //{
-            //    b.ToTable(TrungNhanConsts.DbTablePrefix + "YourEntities", TrungNhanConsts.DbSchema);
-            //    b.ConfigureByConvention(); //auto configure for the base class props
-            //    //...
-            //});
+            builder.Entity<Category>(b =>
+            {
+                b.ToTable(TrungNhanConsts.DbTablePrefix + "Category", TrungNhanConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(p => p.Name).IsRequired().HasMaxLength(250);
+            });
+           
         }
     }
 }
